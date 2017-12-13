@@ -226,11 +226,11 @@ public class LoginWindow {
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "互联网", "内网" }));
 		comboBox.setBounds(389, 112, 126, 27);
 		frame.getContentPane().add(comboBox);
-		
+
 		JLabel label_5 = new JLabel("连接到");
 		label_5.setBounds(337, 113, 81, 21);
 		frame.getContentPane().add(label_5);
-		
+
 		JLabel label_6 = new JLabel("验证码");
 		label_6.setBounds(337, 152, 81, 21);
 		frame.getContentPane().add(label_6);
@@ -249,8 +249,7 @@ public class LoginWindow {
 
 		for (int n = 0, len = headers.length; n < len; n++) {
 
-			cookieStore.addCookie(new BasicClientCookie(headers[n].getName(),
-					headers[n].getValue()));
+			cookieStore.addCookie(new BasicClientCookie(headers[n].getName(), headers[n].getValue()));
 		}
 		System.out.println(cookieStore);
 		return cookieStore;
@@ -263,33 +262,31 @@ public class LoginWindow {
 	 * @param headers
 	 * @return
 	 */
-	public void setRequestHeader(ArrayList<BasicNameValuePair> headers,
-			HttpGet httpGet) {
+	public void setRequestHeader(ArrayList<BasicNameValuePair> headers, HttpGet httpGet) {
 		int flag = 0;
 		// 添加http headers
 		if (headers != null && headers.size() > 0) {
 			for (int n = 0, len = headers.size(); n < len; n++) {
-				httpGet.addHeader(headers.get(n).getName(), headers.get(n)
-						.getValue());
+				httpGet.addHeader(headers.get(n).getName(), headers.get(n).getValue());
 			}
 		}
 	}
 
 	protected void getVilitdyImage() {
 		// TODO Auto-generated method stub
-		SwingWorker<String,String > sw=new SwingWorker<String,String>() {
+		SwingWorker<String, String> sw = new SwingWorker<String, String>() {
 
 			@Override
 			protected void done() {
 				// TODO Auto-generated method stub
 				// 设置验证码
 				try {
-					label_varifyCode.setIcon(new ImageIcon(ImageIO.read(new File("d:/jj/varifyImage.jpg"))));
+					label_varifyCode.setIcon(new ImageIcon(ImageIO.read(new File("resource/varifyImage.jpg"))));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
+
 				System.out.println("done");
 				super.done();
 			}
@@ -301,25 +298,24 @@ public class LoginWindow {
 				String url = "";
 				if (netType == "互联网") {
 
-					url = "http://asone.safesvc.gov.cn/asone/jsp/code.jsp?refresh="+Math.random();
+					url = "http://asone.safesvc.gov.cn/asone/jsp/code.jsp?refresh=" + Math.random();
 				} else {
-					url = "http://asone.safe/asone/jsp/code.jsp?refresh="+Math.random();
+					url = "http://asone.safe/asone/jsp/code.jsp?refresh=" + Math.random();
 				}
 				HttpGet httpGet = new HttpGet(url);
 				FileOutputStream fos;
 				try {
 					// 客户端开始向指定的网址发送请求
-					CloseableHttpResponse response = (CloseableHttpResponse) client
-							.execute(httpGet);
+					CloseableHttpResponse response = (CloseableHttpResponse) client.execute(httpGet);
 					setCookieStore(response);
 
 					InputStream inputStream = response.getEntity().getContent();
-					File file = new File("d:/jj/varifyImage.jpg");
+					File file = new File("resource/varifyImage.jpg");
 					if (!file.exists()) {
 						file.createTempFile("varifyImage", "jpg");
 					}
-		 
-					fos = new FileOutputStream("d:/jj/varifyImage.jpg");
+
+					fos = new FileOutputStream("resource/varifyImage.jpg");
 					byte[] data = new byte[1024];
 					int len = 0;
 					while ((len = inputStream.read(data)) != -1) {
@@ -327,38 +323,29 @@ public class LoginWindow {
 					}
 					fos.close();
 					response.close();
-					
+
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
-				
+
 				// TODO Auto-generated method stub
 				return null;
 			}
-			
+
 		};
 		sw.execute();
-		
 
 	}
 
 	public boolean setUserLoginInfo() {
-
 		Tools tools = new Tools();
-
 		try {
 			UserLoginInfo = new ArrayList();
-			UserLoginInfo.add(new BasicNameValuePair("structionCode",
-					structionCode.getText()));
-			UserLoginInfo.add(new BasicNameValuePair("password", tools
-					.jsMD5(password.getText())));
-			UserLoginInfo.add(new BasicNameValuePair("UserName", UserName
-					.getText()));
-			UserLoginInfo.add(new BasicNameValuePair("varifyCode", varifyCode
-					.getText()));
+			UserLoginInfo.add(new BasicNameValuePair("structionCode", structionCode.getText()));
+			UserLoginInfo.add(new BasicNameValuePair("password", tools.jsMD5(password.getText())));
+			UserLoginInfo.add(new BasicNameValuePair("UserName", UserName.getText()));
+			UserLoginInfo.add(new BasicNameValuePair("varifyCode", varifyCode.getText()));
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
