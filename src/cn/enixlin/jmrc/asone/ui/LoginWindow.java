@@ -140,7 +140,7 @@ public class LoginWindow {
 				}
 			}
 		});
-		btnNewButton.setBounds(315, 32, 200, 60);
+		btnNewButton.setBounds(315, 111, 178, 60);
 		frame.getContentPane().add(btnNewButton);
 
 		lblNewLabel = new JLabel("机构代码");
@@ -154,35 +154,35 @@ public class LoginWindow {
 		structionCode.setColumns(10);
 
 		JLabel label = new JLabel("用户");
-		label.setBounds(15, 71, 81, 21);
+		label.setBounds(15, 111, 81, 21);
 		frame.getContentPane().add(label);
 
 		UserName = new JTextField();
 		UserName.setText("ba");
 		UserName.setColumns(10);
-		UserName.setBounds(111, 68, 189, 27);
+		UserName.setBounds(111, 108, 189, 27);
 		frame.getContentPane().add(UserName);
 
 		JLabel label_1 = new JLabel("密码");
-		label_1.setBounds(15, 110, 81, 21);
+		label_1.setBounds(15, 150, 81, 21);
 		frame.getContentPane().add(label_1);
 
 		password = new JTextField();
 		password.setText("123456Gj");
 		password.setColumns(10);
-		password.setBounds(111, 107, 189, 27);
+		password.setBounds(111, 147, 189, 27);
 		frame.getContentPane().add(password);
 
 		JLabel label_2 = new JLabel("验证码");
-		label_2.setBounds(15, 149, 81, 21);
+		label_2.setBounds(15, 69, 81, 21);
 		frame.getContentPane().add(label_2);
 
 		varifyCode = new JTextField();
 		varifyCode.setColumns(10);
-		varifyCode.setBounds(111, 146, 189, 27);
+		varifyCode.setBounds(111, 66, 189, 27);
 		frame.getContentPane().add(varifyCode);
 
-		label_varifyCode = new JLabel("");
+		label_varifyCode = new JLabel("点击刷新");
 		label_varifyCode.setBorder(new LineBorder(new Color(0, 0, 0)));
 		label_varifyCode.addMouseListener(new MouseAdapter() {
 			@Override
@@ -190,7 +190,7 @@ public class LoginWindow {
 				getVilitdyImage();
 			}
 		});
-		label_varifyCode.setBounds(389, 149, 126, 21);
+		label_varifyCode.setBounds(367, 68, 126, 21);
 		frame.getContentPane().add(label_varifyCode);
 
 		JLabel label_3 = new JLabel("用户清单");
@@ -224,15 +224,15 @@ public class LoginWindow {
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "互联网", "内网" }));
-		comboBox.setBounds(389, 112, 126, 27);
+		comboBox.setBounds(367, 31, 126, 27);
 		frame.getContentPane().add(comboBox);
 
 		JLabel label_5 = new JLabel("连接到");
-		label_5.setBounds(337, 113, 81, 21);
+		label_5.setBounds(315, 32, 81, 21);
 		frame.getContentPane().add(label_5);
 
 		JLabel label_6 = new JLabel("验证码");
-		label_6.setBounds(337, 152, 81, 21);
+		label_6.setBounds(315, 71, 81, 21);
 		frame.getContentPane().add(label_6);
 
 		cookieStore = new BasicCookieStore();
