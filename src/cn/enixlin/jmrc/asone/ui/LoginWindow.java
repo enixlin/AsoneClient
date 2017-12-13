@@ -5,6 +5,7 @@ import java.awt.Label;
 
 import javafx.scene.control.ComboBox;
 
+import javax.imageio.ImageIO;
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -56,6 +57,7 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -138,7 +140,7 @@ public class LoginWindow {
 				}
 			}
 		});
-		btnNewButton.setBounds(315, 32, 200, 99);
+		btnNewButton.setBounds(315, 32, 200, 60);
 		frame.getContentPane().add(btnNewButton);
 
 		lblNewLabel = new JLabel("机构代码");
@@ -188,7 +190,7 @@ public class LoginWindow {
 				getVilitdyImage();
 			}
 		});
-		label_varifyCode.setBounds(315, 149, 200, 21);
+		label_varifyCode.setBounds(389, 149, 126, 21);
 		frame.getContentPane().add(label_varifyCode);
 
 		JLabel label_3 = new JLabel("用户清单");
@@ -222,8 +224,16 @@ public class LoginWindow {
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "互联网", "内网" }));
-		comboBox.setBounds(628, 104, 200, 27);
+		comboBox.setBounds(389, 112, 126, 27);
 		frame.getContentPane().add(comboBox);
+		
+		JLabel label_5 = new JLabel("连接到");
+		label_5.setBounds(337, 113, 81, 21);
+		frame.getContentPane().add(label_5);
+		
+		JLabel label_6 = new JLabel("验证码");
+		label_6.setBounds(337, 152, 81, 21);
+		frame.getContentPane().add(label_6);
 
 		cookieStore = new BasicCookieStore();
 		client = HttpClients.createDefault();
@@ -267,47 +277,71 @@ public class LoginWindow {
 
 	protected void getVilitdyImage() {
 		// TODO Auto-generated method stub
-		// 使用get方法连接服务器
-		String netType = (String) comboBox.getSelectedItem().toString();
-		String url = "";
-		if (netType == "互联网") {
+		SwingWorker<String,String > sw=new SwingWorker<String,String>() {
 
-			url = "http://asone.safesvc.gov.cn/asone/jsp/code.jsp?refresh="
-					+ Math.random();
-		} else {
-			url = "http://asone.safe/asone/jsp/code.jsp?refresh="
-					+ Math.random();
-		}
-		HttpGet httpGet = new HttpGet(url);
-		HttpClient client = new DefaultHttpClient();
-		FileOutputStream fos;
-		try {
-			// 客户端开始向指定的网址发送请求
-			CloseableHttpResponse response = (CloseableHttpResponse) client
-					.execute(httpGet);
-			setCookieStore(response);
+			@Override
+			protected void done() {
+				// TODO Auto-generated method stub
+				// 设置验证码
+				try {
+					label_varifyCode.setIcon(new ImageIcon(ImageIO.read(new File("d:/jj/varifyImage.jpg"))));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+				System.out.println("done");
+				super.done();
+			}
 
-			InputStream inputStream = response.getEntity().getContent();
-			File file = new File("D:\\jj");
-			if (!file.exists()) {
-				file.mkdirs();
+			@Override
+			protected String doInBackground() throws Exception {
+				// 使用get方法连接服务器
+				String netType = (String) comboBox.getSelectedItem().toString();
+				String url = "";
+				if (netType == "互联网") {
+
+					url = "http://asone.safesvc.gov.cn/asone/jsp/code.jsp?refresh="+Math.random();
+				} else {
+					url = "http://asone.safe/asone/jsp/code.jsp?refresh="+Math.random();
+				}
+				HttpGet httpGet = new HttpGet(url);
+				FileOutputStream fos;
+				try {
+					// 客户端开始向指定的网址发送请求
+					CloseableHttpResponse response = (CloseableHttpResponse) client
+							.execute(httpGet);
+					setCookieStore(response);
+
+					InputStream inputStream = response.getEntity().getContent();
+					File file = new File("d:/jj/varifyImage.jpg");
+					if (!file.exists()) {
+						file.createTempFile("varifyImage", "jpg");
+					}
+		 
+					fos = new FileOutputStream("d:/jj/varifyImage.jpg");
+					byte[] data = new byte[1024];
+					int len = 0;
+					while ((len = inputStream.read(data)) != -1) {
+						fos.write(data, 0, len);
+					}
+					fos.close();
+					response.close();
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+				// TODO Auto-generated method stub
+				return null;
 			}
- 
-			fos = new FileOutputStream("g:\\jj\\test.jpg");
-			byte[] data = new byte[1024];
-			int len = 0;
-			while ((len = inputStream.read(data)) != -1) {
-				fos.write(data, 0, len);
-			}
-			fos.close();
-			response.close();
-			// 设置验证码
-			label_varifyCode.setIcon(new ImageIcon("g:\\jj\\test.jpg"));
-			System.out.println("done");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			
+		};
+		sw.execute();
+		
 
 	}
 
