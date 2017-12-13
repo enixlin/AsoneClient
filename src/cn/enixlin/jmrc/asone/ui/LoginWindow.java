@@ -76,7 +76,7 @@ import javax.swing.DefaultComboBoxModel;
 public class LoginWindow {
 
 	private JFrame frame;
-	private CookieStore cookieStore;
+	private String cookie="";
 	private JTextField structionCode;
 	private JLabel label_varifyCode;
 	private JLabel lblNewLabel;
@@ -241,7 +241,7 @@ public class LoginWindow {
 		// 在初始化界面时,取验证码
 		getVilitdyImage();
 
-		cookieStore = new BasicCookieStore();
+//		cookieStore = new BasicCookieStore();
 	}
 
 	/**
@@ -249,17 +249,15 @@ public class LoginWindow {
 	 * 
 	 * @return
 	 */
-	public String setCookieStore(CloseableHttpResponse response) {
+	public void setCookie(CloseableHttpResponse response) {
 		Header[] headers = response.getAllHeaders();
 		
 		for (int n = 0, len = headers.length; n < len; n++) {
-			if(headers[n].getName()=="Set-Cookie") {
-				
+			if(headers[n].getName().equals("Set-Cookie")) {
+				cookie=cookie+";"+headers[n].getValue();
 			}
-			
 		}
-		//System.out.println(cookieStore);
-		return cookieStore;
+		System.out.println("done set cookie");
 	}
 	
 	
@@ -316,7 +314,7 @@ public class LoginWindow {
 				try {
 					// 客户端开始向指定的网址发送请求
 					CloseableHttpResponse response = (CloseableHttpResponse) client.execute(httpGet);
-					setCookieStore(response);
+					setCookie(response);
 
 					InputStream inputStream = response.getEntity().getContent();
 					File file = new File("resource/varifyImage.jpg");
