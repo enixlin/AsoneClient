@@ -235,8 +235,13 @@ public class LoginWindow {
 		label_6.setBounds(315, 71, 81, 21);
 		frame.getContentPane().add(label_6);
 
-		cookieStore = new BasicCookieStore();
+		// 生成一个httpclient对象
 		client = HttpClients.createDefault();
+
+		// 在初始化界面时,取验证码
+		getVilitdyImage();
+
+		cookieStore = new BasicCookieStore();
 	}
 
 	/**
@@ -244,33 +249,37 @@ public class LoginWindow {
 	 * 
 	 * @return
 	 */
-	public CookieStore setCookieStore(CloseableHttpResponse response) {
+	public String setCookieStore(CloseableHttpResponse response) {
 		Header[] headers = response.getAllHeaders();
-
+		
 		for (int n = 0, len = headers.length; n < len; n++) {
-
-			cookieStore.addCookie(new BasicClientCookie(headers[n].getName(), headers[n].getValue()));
-		}
-		System.out.println(cookieStore);
-		return cookieStore;
-
-	}
-
-	/**
-	 * 设定请求头
-	 * 
-	 * @param headers
-	 * @return
-	 */
-	public void setRequestHeader(ArrayList<BasicNameValuePair> headers, HttpGet httpGet) {
-		int flag = 0;
-		// 添加http headers
-		if (headers != null && headers.size() > 0) {
-			for (int n = 0, len = headers.size(); n < len; n++) {
-				httpGet.addHeader(headers.get(n).getName(), headers.get(n).getValue());
+			if(headers[n].getName()=="Set-Cookie") {
+				
 			}
+			
 		}
+		//System.out.println(cookieStore);
+		return cookieStore;
 	}
+	
+	
+	public ArrayList<BasicNameValuePair> initRequestHeaders(String cookie,String ContentLength,String Referer){
+		ArrayList<BasicNameValuePair> headers=new ArrayList<>();
+		headers.add(new BasicNameValuePair("Accept", "image/png, image/svg+xml, image/*;q=0.8, */*;q=0.5"));
+		headers.add(new BasicNameValuePair("Referer", Referer));
+		headers.add(new BasicNameValuePair("Accept-Language", "zh-CN"));
+		headers.add(new BasicNameValuePair("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729)"));
+		headers.add(new BasicNameValuePair("Content-Type", "application/x-www-form-urlencoded"));
+		headers.add(new BasicNameValuePair("Accept-Encoding", "gzip, deflate"));
+		headers.add(new BasicNameValuePair("Host", "asone.safe"));
+		headers.add(new BasicNameValuePair("Content-Length", ContentLength));
+		headers.add(new BasicNameValuePair("DNT", "1"));
+		headers.add(new BasicNameValuePair("Connection", "Keep-Alive"));	
+		headers.add(new BasicNameValuePair("Cache-Control", "no-cache"));	
+		headers.add(new BasicNameValuePair("Cookie",cookie));	
+		return headers;
+	}
+
 
 	protected void getVilitdyImage() {
 		// TODO Auto-generated method stub
@@ -354,4 +363,7 @@ public class LoginWindow {
 		System.out.println("set done");
 		return false;
 	}
+	
+	
+	
 }
