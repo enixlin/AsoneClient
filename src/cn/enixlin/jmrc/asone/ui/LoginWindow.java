@@ -362,6 +362,28 @@ public class LoginWindow {
 		return false;
 	}
 	
+	public void CheckCode() {
+		SwingWorker<String, String> sw=new SwingWorker<String,String>(){
+
+			@Override
+			protected String doInBackground() throws Exception {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			protected void done() {
+				// TODO Auto-generated method stub
+				super.done();
+			}
+			
+		
+			
+		};
+		
+		sw.execute();
+	}
+	
 	
 	
 }

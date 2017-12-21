@@ -1,0 +1,41 @@
+键	值
+Referer	http://asone.safe/asone/servlet/UserServlet?method=forAdd&userCode=&userName=&login_result_sign=login&
+LTPAToken=YmEqNDQwNzAwMDM2NjAwKmd1b2ppeWV3dWJ1KjIqJTJCKjE1MTMxNjQ3MTYwNTkqMTUxMzE2NDcxNjA1OQ==
+
+
+
+
+方向	键	值	过期时间	域	路径	安全	仅 HTTP
+已发送	ASONEADDR	http://asone.safe:80/asone					
+已发送	LTPAToken	PExUUEFUb2tlbj48dXNlckNvZGU+YmE8L3VzZXJDb2RlPjxvcmdDb2RlPjQ0MDcwMDAzNjYwMDwvb3JnQ29kZT48dXNlck5hbWU+Z3Vvaml5ZXd1YnU8L3VzZXJOYW1lPjxvcmdUeXBlPjI8L29yZ1R5cGU+PHRlbD4lMjUyQjwvdGVsPjxzc29TZXJ2ZXJUaW1lPjE1MTMxNjQ3MTYwNTk8L3Nzb1NlcnZlclRpbWU+PHNzb0NsaWVudFRpbWU+MTUxMzE2NDcxNjA1OTwvc3NvQ2xpZW50VGltZT48L0xUUEFUb2tlbj4=					
+已发送	JSESSIONID	f99694031faf11607e53e91426a8.worker2					
+已发送	asone	20111291					
+已接收	JSESSIONID	f99694031faf11607e53e91426a8.worker2	在会话结束时		/asone	否	否
+
+
+
+
+
+键	值
+请求	POST /asone/servlet/UserServlet?method=add HTTP/1.1
+Accept	text/html, application/xhtml+xml, */*
+Referer	http://asone.safe/asone/servlet/UserServlet?method=forAdd&userCode=&userName=
+Accept-Language	zh-CN
+User-Agent	Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729)
+Content-Type	application/x-www-form-urlencoded
+Accept-Encoding	gzip, deflate
+Host	asone.safe
+Content-Length	147
+DNT	1
+Connection	Keep-Alive
+Cache-Control	no-cache
+Cookie	ASONEADDR=http://asone.safe:80/asone; LTPAToken=PExUUEFUb2tlbj48dXNlckNvZGU+YmE8L3VzZXJDb2RlPjxvcmdDb2RlPjQ0MDcwMDAzNjYwMDwvb3JnQ29kZT48dXNlck5hbWU+Z3Vvaml5ZXd1YnU8L3VzZXJOYW1lPjxvcmdUeXBlPjI8L29yZ1R5cGU+PHRlbD4lMjUyQjwvdGVsPjxzc29TZXJ2ZXJUaW1lPjE1MTMxNjQ3MTYwNTk8L3Nzb1NlcnZlclRpbWU+PHNzb0NsaWVudFRpbWU+MTUxMzE2NDcxNjA1OTwvc3NvQ2xpZW50VGltZT48L0xUUEFUb2tlbj4=; JSESSIONID=f99694031faf11607e53e91426a8.worker2; asone=20111291
+
+
+
+方向	键	值	过期时间	域	路径	安全	仅 HTTP
+已发送	ASONEADDR	http://asone.safe:80/asone					
+已发送	LTPAToken	PExUUEFUb2tlbj48dXNlckNvZGU+YmE8L3VzZXJDb2RlPjxvcmdDb2RlPjQ0MDcwMDAzNjYwMDwvb3JnQ29kZT48dXNlck5hbWU+Z3Vvaml5ZXd1YnU8L3VzZXJOYW1lPjxvcmdUeXBlPjI8L29yZ1R5cGU+PHRlbD4lMjUyQjwvdGVsPjxzc29TZXJ2ZXJUaW1lPjE1MTMxNjQ3MTYwNTk8L3Nzb1NlcnZlclRpbWU+PHNzb0NsaWVudFRpbWU+MTUxMzE2NDcxNjA1OTwvc3NvQ2xpZW50VGltZT48L0xUUEFUb2tlbj4=					
+已发送	JSESSIONID	f99694031faf11607e53e91426a8.worker2					
+已发送	asone	20111291					
+已接收	JSESSIONID	f99694031faf11607e53e91426a8.worker2	在会话结束时		/asone	否	否
